@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 300427202}
   m_Layer: 0
   m_Name: WallUp
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 644469481}
   - component: {fileID: 644469480}
   - component: {fileID: 644469479}
+  - component: {fileID: 644469483}
   m_Layer: 0
   m_Name: SnakeHead
   m_TagString: Untagged
@@ -552,6 +553,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &644469483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644469478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b16c7a333f428f98fd503f534623dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1407470909
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +578,7 @@ GameObject:
   - component: {fileID: 1407470910}
   m_Layer: 0
   m_Name: WallDown
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -676,7 +689,7 @@ GameObject:
   - component: {fileID: 1583076875}
   m_Layer: 0
   m_Name: WallRight
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,7 +800,7 @@ GameObject:
   - component: {fileID: 1673517652}
   m_Layer: 0
   m_Name: WallLeft
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
