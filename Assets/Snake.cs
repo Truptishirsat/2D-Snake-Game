@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    //private Vector2 _direction;
+    
     private Vector2 direction;
-    private Vector2 _direction;
     
     void Start()
     {
@@ -17,18 +16,30 @@ public class Snake : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            direction = Vector2.up;
+        {   
+            if(direction.y != -1)
+            {
+                direction = Vector2.up;
+            }
         }else if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            direction = Vector2.down;
+        {   
+            if(direction.y != 1)
+            {
+                direction = Vector2.down;
+            }
         }else if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            direction = Vector2.left;
+            if(direction.x != 1)
+            {
+                direction = Vector2.left;
+            }
         }
         else if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            direction = Vector2.right;
+            if(direction.x != -1)
+            {
+                direction = Vector2.right;
+            }
         }
         else
         {
@@ -55,6 +66,12 @@ public class Snake : MonoBehaviour
             }
 
             transform.position = position;
+        }else if(other.tag == "Snake")
+        {
+            ResetState();
+        }else if(other.tag == "MassGainerFood")
+        {
+            GrowSnake();
         }
 
     
@@ -71,7 +88,12 @@ public class Snake : MonoBehaviour
 
     private void ResetState()
     {
-        _direction = Vector2.right;
+        direction = Vector2.right;
         transform.position = Vector3.zero;
+    }
+
+    void GrowSnake()
+    {
+
     }
 }
