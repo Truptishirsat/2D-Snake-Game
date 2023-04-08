@@ -579,6 +579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b16c7a333f428f98fd503f534623dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snakeSegment: {fileID: 8267213511669797417, guid: 733ffb6a32b8f8a9f8ff30242390d8e7, type: 3}
+  increaseLength: 4
+  decreaseLength: 2
 --- !u!1 &1407470909
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +987,7 @@ GameObject:
   - component: {fileID: 1793080481}
   m_Layer: 0
   m_Name: MassBurnerFood
-  m_TagString: Untagged
+  m_TagString: MassBurnerFood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,27 @@ public class Snake : MonoBehaviour
 {
     
     private Vector2 direction;
-    
+    public Transform snakeSegment;
+    public int increaseLength;
+    public int decreaseLength;
+
+    private List<Transform> segments = new List<Transform>();
+
+    private enum State{
+        Alive,
+        Dead
+    }
+    private State state;
     void Start()
     {
+        state = State.Alive;
         ResetState();
     }
 
     void Update()
     {
+        
+            
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {   
             if(direction.y != -1)
@@ -38,16 +52,13 @@ public class Snake : MonoBehaviour
         {
             if(direction.x != -1)
             {
-                direction = Vector2.right;
+            direction = Vector2.right;
             }
         }
         else
         {
             return;
         }
-        
-        
-    
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -68,32 +79,69 @@ public class Snake : MonoBehaviour
             transform.position = position;
         }else if(other.tag == "Snake")
         {
-            ResetState();
+           state = State.Dead;
+
         }else if(other.tag == "MassGainerFood")
         {
-            GrowSnake();
+            GrowSnake(increaseLength);
+        }else if(other.tag == "MassBurnerFood")
+        {   
+            ShrinkSnake(segments.Count);
+            
         }
 
     
     }
     void FixedUpdate()
     {
-        float x = MathF.Round(transform.position.x) + direction.x;
-        float y = MathF.Round(transform.position.y) + direction.y;
+        if(state == State.Alive)
+        {
+            float x = MathF.Round(transform.position.x) + direction.x;
+            float y = MathF.Round(transform.position.y) + direction.y;
 
-        transform.position = new Vector2(x,y);
+            for(int i = segments.Count - 1; i > 0; i--)
+            {
+                segments[i].position = segments[i - 1].position; 
+            }
+
+            transform.position = new Vector2(x,y);
+        }
+        
     }
     
 
 
     private void ResetState()
     {
+        for(int i = segments.Count - 1; i > 0; i--)
+        {
+            Destroy(segments[i].gameObject);
+        }
+        segments.Clear();
         direction = Vector2.right;
         transform.position = Vector3.zero;
+        segments.Add(this.transform);
     }
 
-    void GrowSnake()
+    private void GrowSnake(int length)
     {
+        for(int i = 0; i < length; i++)
+        {
+            Transform segment = Instantiate(snakeSegment);
+            segment.position = segments[segments.Count - 1].position;
+            segments.Add(segment);
+        }
+    }
+
+    private void ShrinkSnake(int count)
+    {
+        int remainingsegments = count - decreaseLength;
+        if(remainingsegments > 0)
+        {
+            ResetState();
+            GrowSnake(remainingsegments - 1);
+        }
 
     }
+
 }
