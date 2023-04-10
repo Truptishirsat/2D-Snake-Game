@@ -41,6 +41,8 @@ public class MassGainerFood : MonoBehaviour
         if(timer >= spawnRange)
         {
             transform.position = RandomizePosition();
+            GetComponent<SpriteRenderer>().enabled = true;     
+
         }
 
     }

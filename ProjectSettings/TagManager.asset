@@ -8,6 +8,7 @@ TagManager:
   - Snake
   - MassGainerFood
   - MassBurnerFood
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,4 @@
-using System.Net.Mail;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,14 +11,36 @@ public class Snake : MonoBehaviour
     public Transform snakeSegment;
     public int increaseLength;
     public int decreaseLength;
+    public bool isActiveShield;
 
+    public float speed = 5f;
+    public float speedMultiplier = 1f;
+
+    private float nextUpdate;
+    public bool isSpeedActive;
+
+    public int score = 1;
+
+    private float timer = 0.0f;
+    private Shield shield;
     private List<Transform> segments = new List<Transform>();
 
+   
     private enum State{
         Alive,
         Dead
     }
     private State state;
+   
+
+    void Awake()
+    {
+        shield = FindObjectOfType<Shield>();
+        isActiveShield = false;
+        speed = 10f;
+        isSpeedActive = false;
+
+    }
     void Start()
     {
         state = State.Alive;
@@ -27,11 +49,24 @@ public class Snake : MonoBehaviour
 
     void Update()
     {
+        if(isActiveShield == true || isSpeedActive == true)
+        {
+            timer += Time.deltaTime;
+        }
+        else{
+            timer = 0.0f;
+        }
+        if(timer >= 5f)
+        {
+            isActiveShield = false;
+            isSpeedActive = false;
+            speed = 5f;
+            timer = 0.0f;
+        }
         
-            
         if(Input.GetKeyDown(KeyCode.UpArrow))
-        {   
-            if(direction.y != -1)
+        {  
+             if(direction.y != -1)
             {
                 direction = Vector2.up;
             }
@@ -79,8 +114,10 @@ public class Snake : MonoBehaviour
             transform.position = position;
         }else if(other.tag == "Snake")
         {
-           state = State.Dead;
-
+            if(!isActiveShield)
+            {
+                state = State.Dead;
+            }
         }else if(other.tag == "MassGainerFood")
         {
             GrowSnake(increaseLength);
@@ -88,12 +125,28 @@ public class Snake : MonoBehaviour
         {   
             ShrinkSnake(segments.Count);
             
+        }else if(other.tag == "Shield")
+        {
+            if(isActiveShield == true)
+            {
+               if(timer >= 3f)
+               {
+                isActiveShield = false;
+                state = State.Alive;
+               }
+            }
         }
 
     
     }
+
+   
     void FixedUpdate()
     {
+        if((isSpeedActive == true) && (Time.time < nextUpdate))
+        {
+            return;
+        }
         if(state == State.Alive)
         {
             float x = MathF.Round(transform.position.x) + direction.x;
@@ -105,7 +158,10 @@ public class Snake : MonoBehaviour
             }
 
             transform.position = new Vector2(x,y);
+            nextUpdate = Time.time + (1f / (speed * speedMultiplier));
         }
+
+
         
     }
     
@@ -143,5 +199,9 @@ public class Snake : MonoBehaviour
         }
 
     }
+
+   
+   
+
 
 }
