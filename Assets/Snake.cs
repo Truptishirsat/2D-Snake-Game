@@ -13,17 +13,14 @@ public class Snake : MonoBehaviour
     public int decreaseLength;
     public bool isActiveShield;
 
-    public float speed = 5f;
-    public float speedMultiplier = 1f;
-
-    private float nextUpdate;
     public bool isSpeedActive;
+    public float cooldown = 3f;
 
-    public int score = 1;
+    public int score = 5;
 
     private float timer = 0.0f;
     private Shield shield;
-    private List<Transform> segments = new List<Transform>();
+    public List<Transform> segments = new List<Transform>();
 
    
     private enum State{
@@ -37,7 +34,6 @@ public class Snake : MonoBehaviour
     {
         shield = FindObjectOfType<Shield>();
         isActiveShield = false;
-        speed = 10f;
         isSpeedActive = false;
 
     }
@@ -56,11 +52,11 @@ public class Snake : MonoBehaviour
         else{
             timer = 0.0f;
         }
-        if(timer >= 5f)
+        if(timer >= cooldown)
         {
             isActiveShield = false;
             isSpeedActive = false;
-            speed = 5f;
+            Time.fixedDeltaTime = 0.08f;
             timer = 0.0f;
         }
         
@@ -123,6 +119,7 @@ public class Snake : MonoBehaviour
             GrowSnake(increaseLength);
         }else if(other.tag == "MassBurnerFood")
         {   
+            score -= 2;
             ShrinkSnake(segments.Count);
             
         }else if(other.tag == "Shield")
@@ -131,8 +128,8 @@ public class Snake : MonoBehaviour
             {
                if(timer >= 3f)
                {
-                isActiveShield = false;
-                state = State.Alive;
+                    isActiveShield = false;
+                    state = State.Alive;
                }
             }
         }
@@ -143,10 +140,6 @@ public class Snake : MonoBehaviour
    
     void FixedUpdate()
     {
-        if((isSpeedActive == true) && (Time.time < nextUpdate))
-        {
-            return;
-        }
         if(state == State.Alive)
         {
             float x = MathF.Round(transform.position.x) + direction.x;
@@ -158,11 +151,7 @@ public class Snake : MonoBehaviour
             }
 
             transform.position = new Vector2(x,y);
-            nextUpdate = Time.time + (1f / (speed * speedMultiplier));
         }
-
-
-        
     }
     
 
@@ -199,9 +188,4 @@ public class Snake : MonoBehaviour
         }
 
     }
-
-   
-   
-
-
 }

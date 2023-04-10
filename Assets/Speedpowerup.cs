@@ -10,7 +10,7 @@ public class Speedpowerup : PowerUpsEffect
     {
         snake = target.GetComponent<Snake>();
         snake.isSpeedActive = true;
-        snake.speed += 20f;
+        Time.fixedDeltaTime = 0.04f;
     }
 }
 

@@ -15,16 +15,26 @@ public class MassBurnerFood : MonoBehaviour
     {
         snake = FindObjectOfType<Snake>();
         food = FindObjectOfType<MassGainerFood>();
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Start()
     {
-        transform.position = food.RandomizePosition();
+        
     }
 
     void Update()
     {
         // randomizing position of food it is no longer chnaged its position or eaten by snake
+        if(snake.segments.Count > 2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        }
 
         if(previousPosition == transform.position)
         {
@@ -39,14 +49,24 @@ public class MassBurnerFood : MonoBehaviour
 
         if(timer >= spawnRange)
         {
-            transform.position = food.RandomizePosition();
+            if(snake.segments.Count > 2)
+            {
+                transform.position = food.RandomizePosition();
+                //.GetComponent<SpriteRenderer>().enabled = true;
+
+            }
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Snake")
         {
-            transform.position = food.RandomizePosition();
+            if(snake.segments.Count > 2)
+            {
+                transform.position = food.RandomizePosition();
+               // gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
+            }
         }
     }
 

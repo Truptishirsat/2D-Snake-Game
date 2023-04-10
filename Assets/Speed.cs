@@ -6,7 +6,7 @@ public class Speed : MonoBehaviour
 {
     private MassGainerFood food;
     private Vector3 previousPosition;
-    private float spawnRange = 18f;
+    private float spawnRange = 20f;
 
 
     float timer = 0.0f;
