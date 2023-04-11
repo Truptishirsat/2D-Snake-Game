@@ -12,7 +12,7 @@ public class Speedpowerup : PowerUpsEffect
         
         switch(target.name)
         {
-            case "Snake":
+            case "SnakeA":
                 snake = target.GetComponent<Snake>();
                 snake.isSpeedActive = true;
                 Time.fixedDeltaTime = 0.04f;

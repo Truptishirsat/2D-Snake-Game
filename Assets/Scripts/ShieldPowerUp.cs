@@ -15,7 +15,7 @@ public class ShieldPowerUp : PowerUpsEffect
     
         switch(target.name)
         {
-            case "Snake":
+            case "SnakeA":
                 snake = target.GetComponent<Snake>();
                 snake.isActiveShield = true;
                 break;

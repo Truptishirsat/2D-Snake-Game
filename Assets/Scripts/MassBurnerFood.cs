@@ -52,7 +52,6 @@ public class MassBurnerFood : MonoBehaviour
             if(((snake.segments.Count > 2) && (snake.score > 3)) && ((snakeB.segments.Count > 2) && (snakeB.score > 3)))
             {
                 transform.position = food.RandomizePosition();
-                //.GetComponent<SpriteRenderer>().enabled = true;
 
             }
         }
@@ -64,7 +63,6 @@ public class MassBurnerFood : MonoBehaviour
             if(((snake.segments.Count > 2) && (snake.score > 3)) && ((snakeB.segments.Count > 2) && (snakeB.score > 3)) )
             {
                 transform.position = food.RandomizePosition();
-               // gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
             }
         }

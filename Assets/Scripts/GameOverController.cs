@@ -8,11 +8,9 @@ public class GameOverController : MonoBehaviour
 {
     public Button restart;
     public Button exit;
-   // private Snake snake;
 
     void Awake()
     {
-       // snake = FindObjectOfType<Snake>();
         restart.onClick.AddListener(LoadMainScene);
         exit.onClick.AddListener(LoadLobby);
     }

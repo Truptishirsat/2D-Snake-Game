@@ -13,7 +13,6 @@ public class WinnerController : MonoBehaviour
     public TextMeshProUGUI winner_text;
     void Awake()
     {
-       // winner_text = GetComponent<TextMeshProUGUI>();
         exit.onClick.AddListener(LoadLobby);
     }
     public void OnWin(string name)

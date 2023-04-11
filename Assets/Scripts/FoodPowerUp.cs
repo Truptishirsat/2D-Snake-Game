@@ -13,7 +13,7 @@ public class FoodPowerUp : PowerUpsEffect
 
         switch(target.name)
         {
-            case "Snake":
+            case "SnakeA":
                 snake = target.GetComponent<Snake>();
                 snake.score = 2 * snake.score; 
                 break;

@@ -27,7 +27,6 @@ public class PowerUp1 : MonoBehaviour
         powerup.Apply(player);  // Apply effect to player.
         gameObject.GetComponent<SpriteRenderer>().enabled = false;   
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
-
         food.RandomizePosition();
     }
 
