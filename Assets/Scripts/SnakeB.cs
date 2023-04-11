@@ -1,12 +1,10 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snake : MonoBehaviour
+public class SnakeB : MonoBehaviour
 {
-    
     private Vector2 direction;
     public Transform snakeSegment;
     public int increaseLength;
@@ -61,26 +59,26 @@ public class Snake : MonoBehaviour
             timer = 0.0f;
         }
         
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(Input.GetKeyDown(KeyCode.W))
         {  
              if(direction.y != -1)
             {
                 direction = Vector2.up;
             }
-        }else if(Input.GetKeyDown(KeyCode.DownArrow))
+        }else if(Input.GetKeyDown(KeyCode.S))
         {   
             if(direction.y != 1)
             {
                 direction = Vector2.down;
             }
-        }else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        }else if(Input.GetKeyDown(KeyCode.A))
         {
             if(direction.x != 1)
             {
                 direction = Vector2.left;
             }
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        else if(Input.GetKeyDown(KeyCode.D))
         {
             if(direction.x != -1)
             {
@@ -109,7 +107,7 @@ public class Snake : MonoBehaviour
             }
 
             transform.position = position;
-        }else if(other.tag == "Snake" || other.tag == "SnakeB")
+        }else if(other.tag == "SnakeB" || other.tag == "Snake")
         {
             if(!isActiveShield)
             {
@@ -165,8 +163,8 @@ public class Snake : MonoBehaviour
             Destroy(segments[i].gameObject);
         }
         segments.Clear();
-        direction = Vector2.right;
-        transform.position = Vector3.zero;
+        direction = Vector2.left;
+        transform.position = new Vector3(6f,-5f,0f);
         segments.Add(this.transform);
     }
 

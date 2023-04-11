@@ -6,6 +6,7 @@ public class MassGainerFood : MonoBehaviour
 {
     public Collider2D gridArea;
     private Snake snake;
+    private SnakeB snakeB;
     private MassBurnerFood massBurnerFood;
 
     private float timer = 0.0f;
@@ -16,6 +17,7 @@ public class MassGainerFood : MonoBehaviour
     void Awake()
     {
         snake = FindObjectOfType<Snake>();
+        snakeB = FindObjectOfType<SnakeB>();
         massBurnerFood = FindObjectOfType<MassBurnerFood>();
 
     }
@@ -41,7 +43,9 @@ public class MassGainerFood : MonoBehaviour
         if(timer >= spawnRange)
         {
             transform.position = RandomizePosition();
-            GetComponent<SpriteRenderer>().enabled = true;     
+            GetComponent<SpriteRenderer>().enabled = true;  
+            GetComponent<CircleCollider2D>().enabled = true;
+              
 
         }
 
@@ -81,7 +85,7 @@ public class MassGainerFood : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         
-        if(other.tag == "Snake")
+        if(other.tag == "Snake" || other.tag == "SnakeB")
         {
             transform.position = RandomizePosition();
         }

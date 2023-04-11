@@ -7,10 +7,22 @@ using UnityEngine;
 public class FoodPowerUp : PowerUpsEffect
 {
    private Snake snake;
+   private SnakeB snakeB;
    public override void Apply(GameObject target)
     {
-        snake = target.GetComponent<Snake>();
-        snake.score = 2 * snake.score; 
-        Debug.Log("Score:" + snake.score);
+
+        switch(target.name)
+        {
+            case "Snake":
+                snake = target.GetComponent<Snake>();
+                snake.score = 2 * snake.score; 
+                break;
+
+            case "SnakeB":
+                snakeB = target.GetComponent<SnakeB>();
+                snakeB.score = 2 * snakeB.score; 
+                break;
+        }
+        
     }
 }

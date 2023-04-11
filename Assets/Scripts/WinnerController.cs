@@ -8,14 +8,27 @@ using TMPro;
 
 public class WinnerController : MonoBehaviour
 {
+       
     public Button exit;
+    public TextMeshProUGUI winner_text;
     void Awake()
     {
+       // winner_text = GetComponent<TextMeshProUGUI>();
         exit.onClick.AddListener(LoadLobby);
     }
-    public void OnWin()
+    public void OnWin(string name)
     {
         gameObject.SetActive(true);
+
+        if(name == "SnakeA")
+        {
+            winner_text.text = "SankeA Won";
+        }
+        else if(name == "SnakeB")
+        {
+            winner_text.text = "SankeB Won";
+
+        }
     }
 
     void LoadLobby()

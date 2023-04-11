@@ -6,11 +6,26 @@ using UnityEngine;
 public class Speedpowerup : PowerUpsEffect
 {
     private Snake snake;
+    private SnakeB snakeB;
     public override void Apply(GameObject target)
     {
-        snake = target.GetComponent<Snake>();
-        snake.isSpeedActive = true;
-        Time.fixedDeltaTime = 0.04f;
+        
+        switch(target.name)
+        {
+            case "Snake":
+                snake = target.GetComponent<Snake>();
+                snake.isSpeedActive = true;
+                Time.fixedDeltaTime = 0.04f;
+                
+                break;
+            case "SnakeB":
+                snakeB = target.GetComponent<SnakeB>();
+                snakeB.isSpeedActive = true;
+                Time.fixedDeltaTime = 0.04f;
+                
+                break;
+
+        }
     }
 }
 

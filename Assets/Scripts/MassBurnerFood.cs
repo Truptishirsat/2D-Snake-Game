@@ -6,6 +6,7 @@ public class MassBurnerFood : MonoBehaviour
 {
     public Collider2D gridArea;
     private Snake snake;
+    private SnakeB snakeB;
     private MassGainerFood food;
     private float timer = 0.0f;
     private float spawnRange = 12f;
@@ -14,25 +15,24 @@ public class MassBurnerFood : MonoBehaviour
     void Awake()
     {
         snake = FindObjectOfType<Snake>();
+        snakeB = FindObjectOfType<SnakeB>();
         food = FindObjectOfType<MassGainerFood>();
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-    }
-
-    void Start()
-    {
-        
     }
 
     void Update()
     {
         // randomizing position of food it is no longer chnaged its position or eaten by snake
-        if((snake.segments.Count) > 2 && (snake.score > 3))
+        if(((snake.segments.Count) > 2 && (snake.score > 3)) && ((snakeB.segments.Count > 2) && (snakeB.score > 3)))
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            gameObject.GetComponent<CircleCollider2D>().enabled = true;
+
         }
         else
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
 
         }
 
@@ -49,7 +49,7 @@ public class MassBurnerFood : MonoBehaviour
 
         if(timer >= spawnRange)
         {
-            if((snake.segments.Count > 2) && (snake.score > 3))
+            if(((snake.segments.Count > 2) && (snake.score > 3)) && ((snakeB.segments.Count > 2) && (snakeB.score > 3)))
             {
                 transform.position = food.RandomizePosition();
                 //.GetComponent<SpriteRenderer>().enabled = true;
@@ -59,9 +59,9 @@ public class MassBurnerFood : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Snake")
+        if(other.tag == "Snake" || other.tag == "SnakeB")
         {
-            if((snake.segments.Count > 2) && (snake.score > 3))
+            if(((snake.segments.Count > 2) && (snake.score > 3)) && ((snakeB.segments.Count > 2) && (snakeB.score > 3)) )
             {
                 transform.position = food.RandomizePosition();
                // gameObject.GetComponent<SpriteRenderer>().enabled = true;

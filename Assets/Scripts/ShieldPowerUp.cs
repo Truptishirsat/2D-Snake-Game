@@ -7,11 +7,24 @@ public class ShieldPowerUp : PowerUpsEffect
 {
     private Shield shield;
     private Snake snake;
+
+    private SnakeB snakeB;
     public float period = 2f;
     public override void Apply(GameObject target)
     {
-        snake = target.GetComponent<Snake>();
-        snake.isActiveShield = true;
+    
+        switch(target.name)
+        {
+            case "Snake":
+                snake = target.GetComponent<Snake>();
+                snake.isActiveShield = true;
+                break;
+
+            case "SnakeB":
+                snakeB = target.GetComponent<SnakeB>();
+                snakeB.isActiveShield = true;
+                break;
+        }
     }
 
    

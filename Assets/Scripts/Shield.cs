@@ -35,18 +35,12 @@ public class Shield : MonoBehaviour
         if(timer >= spawnRange)
         {
             transform.position = food.RandomizePosition();
-            GetComponent<SpriteRenderer>().enabled = true;     
-
+            GetComponent<SpriteRenderer>().enabled = true; 
+            GetComponent<CircleCollider2D>().enabled = true;
         }
     }
 
-  /*  void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.tag == "Snake")
-        {
-            transform.position = food.RandomizePosition();
-        }
-    }*/
+  
 
     
 

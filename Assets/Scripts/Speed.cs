@@ -35,8 +35,8 @@ public class Speed : MonoBehaviour
         if(timer >= spawnRange)
         {
             transform.position = food.RandomizePosition();
-            GetComponent<SpriteRenderer>().enabled = true;     
-
+            GetComponent<SpriteRenderer>().enabled = true;  
+            GetComponent<CircleCollider2D>().enabled = true;
         }
     }
 }
