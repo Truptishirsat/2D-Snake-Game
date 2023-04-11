@@ -11,6 +11,7 @@ TagManager:
   - Shield
   - SnakeB
   - SankeA
+  - GameOverController
   layers:
   - Default
   - TransparentFX
